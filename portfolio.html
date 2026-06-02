@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #f0ede8;
+    --muted: #888;
+    --accent: #c8a96e;
+    --accent2: #7c9e8f;
+    --tag-bg: rgba(200,169,110,0.1);
+    --tag-color: #c8a96e;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(14px);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; display: block; height: 1px; flex: 1;
+    background: var(--border);
+  }
+
+  /* HERO */
+  #hero {
+    padding: 12rem 0 7rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-bio {
+    font-size: 1rem; color: var(--muted); max-width: 520px;
+    line-height: 1.8; margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    padding: 0.65rem 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    border-radius: 2px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0d0d; border: 1px solid var(--accent);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #d9bc84; border-color: #d9bc84; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted); border: 1px solid var(--border-hover);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+
+  /* PHOTO */
+  .photo-frame {
+    width: 200px; height: 200px;
+    border-radius: 3px;
+    border: 1px solid var(--border-hover);
+    background: var(--bg3);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.6rem; color: var(--muted);
+    font-size: 0.75rem; font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    position: relative; overflow: hidden;
+    flex-shrink: 0;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.015) 10px,
+      rgba(255,255,255,0.015) 11px
+    );
+  }
+  .photo-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: start;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-details { display: flex; flex-direction: column; gap: 1rem; }
+  .detail-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; }
+  .detail-value { color: var(--text); font-weight: 400; text-align: right; max-width: 200px; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 3px; overflow: hidden;
+  }
+  .skill-group {
+    background: var(--bg2);
+    padding: 1.5rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .skill-group:hover { background: var(--bg3); }
+  .skill-group-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .tag.teal {
+    background: rgba(124,158,143,0.1);
+    color: var(--accent2);
+    border-color: rgba(124,158,143,0.2);
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+  .project-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .project-item:last-child { border-bottom: none; }
+  .project-item:hover .project-arrow { transform: translate(3px, -3px); color: var(--accent); }
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; color: var(--muted);
+    letter-spacing: 0.1em; margin-bottom: 0.6rem;
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem; font-weight: 400;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s;
+  }
+  .project-item:hover .project-title { color: var(--accent); }
+  .project-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-meta {
+    display: flex; flex-direction: column;
+    align-items: flex-end; justify-content: space-between;
+  }
+  .project-arrow {
+    font-size: 1.4rem; color: var(--muted);
+    transition: all 0.25s; line-height: 1;
+  }
+  .project-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* RESEARCH */
+  .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .research-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 3px; padding: 1.75rem;
+    transition: border-color 0.2s;
+  }
+  .research-card:hover { border-color: var(--border-hover); }
+  .research-meta {
+    display: flex; justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; color: var(--muted);
+    letter-spacing: 0.08em; margin-bottom: 0.8rem;
+  }
+  .research-venue {
+    color: var(--accent2);
+  }
+  .research-title {
+    font-size: 1rem; font-weight: 500; margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+  .research-abstract { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+  .research-links { display: flex; gap: 1rem; }
+  .research-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border-bottom: 1px solid rgba(200,169,110,0.3);
+    transition: border-color 0.2s;
+  }
+  .research-link:hover { border-color: var(--accent); }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 0; }
+  .edu-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.08em; padding-top: 0.2rem;
+  }
+  .edu-degree { font-weight: 500; margin-bottom: 0.3rem; }
+  .edu-school { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .edu-note { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; font-weight: 400; line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .contact-heading em { font-style: italic; color: var(--accent); }
+  .contact-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .contact-link-item:hover {
+    border-color: var(--border-hover);
+    background: var(--bg2);
+  }
+  .contact-link-item:hover .cl-arrow { transform: translate(3px, -3px); color: var(--accent); }
+  .cl-left { display: flex; align-items: center; gap: 0.75rem; }
+  .cl-icon { font-size: 0.9rem; color: var(--muted); width: 20px; text-align: center; }
+  .cl-label { font-size: 0.88rem; }
+  .cl-value { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+  .cl-arrow { color: var(--muted); transition: all 0.2s; font-size: 1rem; }
+  .contact-email-cta {
+    margin-top: 1.5rem;
+  }
+  .email-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px; padding: 1.25rem;
+  }
+  .email-box label {
+    display: block; font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .email-display {
+    font-size: 1rem; color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 0;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero { grid-template-columns: 1fr; padding: 9rem 0 5rem; }
+    .photo-frame { display: none; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .project-item { grid-template-columns: 1fr; }
+    .project-meta { flex-direction: row; margin-top: 0.5rem; }
+    .edu-item { grid-template-columns: 80px 1fr; gap: 1rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">YN</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <section id="hero">
+    <div>
+      <p class="hero-eyebrow">M.Tech Researcher &nbsp;·&nbsp; Software Engineer &nbsp;·&nbsp; Delhi, India</p>
+      <h1>Your<br><em>Full Name</em></h1>
+      <p class="hero-bio">
+        Researcher and engineer working at the intersection of <strong style="color:var(--text);font-weight:500">Large Language Models</strong>, 
+        edge computing, and Industrial IoT — building efficient AI systems that run where compute is scarce.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        <a href="resume.pdf" class="btn btn-ghost" target="_blank">Resume ↗</a>
+      </div>
+    </div>
+    <div class="photo-frame">
+      <div class="photo-icon">👤</div>
+      <span>Your Photo</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">01 — About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Software Engineering researcher</strong> at Delhi Technological University, 
+          pursuing M.Tech by Research under the supervision of my advisor. My work focuses on 
+          compressing Large Language Models for deployment on resource-constrained edge devices.
+        </p>
+        <p>
+          My research combines <strong>Knowledge Distillation</strong> and <strong>Post-Training Quantization</strong> 
+          to enable real-time fault detection in Industrial IoT environments — making AI practical 
+          without the cloud dependency.
+        </p>
+        <p>
+          Before this, I completed my undergraduate degree in Computer Science and have worked on 
+          projects spanning image processing, steganalysis, and applied machine learning.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-row">
+          <span class="detail-label">Institution</span>
+          <span class="detail-value">Delhi Technological University</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Degree</span>
+          <span class="detail-value">M.Tech (by Research)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Focus</span>
+          <span class="detail-value">LLM Compression / Edge AI</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Location</span>
+          <span class="detail-value">New Delhi, India</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Status</span>
+          <span class="detail-value">Open to Opportunities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">02 — Skills & Stack</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-name">Languages</p>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">SQL</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">ML / AI</p>
+        <div class="skill-tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">HuggingFace</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">ONNX</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Research</p>
+        <div class="skill-tags">
+          <span class="tag">Knowledge Distillation</span>
+          <span class="tag">Quantization</span>
+          <span class="tag">TinyBERT</span>
+          <span class="tag">CNNs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Edge / IoT</p>
+        <div class="skill-tags">
+          <span class="tag teal">Raspberry Pi</span>
+          <span class="tag teal">ONNX Runtime</span>
+          <span class="tag teal">TFLite</span>
+          <span class="tag teal">MQTT</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Data & Tools</p>
+        <div class="skill-tags">
+          <span class="tag">NumPy</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">Matplotlib</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Dev Tools</p>
+        <div class="skill-tags">
+          <span class="tag teal">Git</span>
+          <span class="tag teal">Linux</span>
+          <span class="tag teal">Docker</span>
+          <span class="tag teal">LaTeX</span>
+          <span class="tag teal">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">03 — Projects</div>
+    <div class="projects-list">
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">001</p>
+          <h3 class="project-title">LLM Compression for Industrial Edge</h3>
+          <p class="project-desc">
+            Combined Knowledge Distillation (TinyBERT-style) with INT8 post-training quantization 
+            to achieve &gt;60% model size reduction while preserving fault-detection accuracy on 
+            simulated IIoT sensor streams.
+          </p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">HuggingFace</span>
+            <span class="tag">ONNX</span>
+            <span class="tag">Knowledge Distillation</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2024–25</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">002</p>
+          <h3 class="project-title">CNN-based Steganalysis (Modified AlexNet)</h3>
+          <p class="project-desc">
+            Designed and trained a modified AlexNet architecture for image steganalysis, achieving 
+            improved detection of LSB and DCT-based steganographic payloads compared to baseline CNN models.
+          </p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">CNN</span>
+            <span class="tag">Image Processing</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2024</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">003</p>
+          <h3 class="project-title">Add Your Next Project</h3>
+          <p class="project-desc">
+            Describe the problem you solved, the approach you took, and the measurable outcome. 
+            Numbers and results always stand out to recruiters.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Your Stack</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2025</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label">04 — Research & Publications</div>
+    <div class="research-list">
+
+      <div class="research-card">
+        <div class="research-meta">
+          <span>Working Paper / Under Review</span>
+          <span class="research-venue">Target: IEEE Trans. on Industrial Informatics</span>
+        </div>
+        <h3 class="research-title">Efficient LLM Deployment on IIoT Edge Devices via Knowledge Distillation and Quantization</h3>
+        <p class="research-abstract">
+          This work investigates the joint application of task-specific knowledge distillation and 
+          post-training quantization for deploying transformer-based fault detection models on 
+          compute-constrained industrial edge nodes. We demonstrate that the proposed pipeline 
+          achieves competitive accuracy with a significantly reduced inference footprint.
+        </p>
+        <div class="research-links">
+          <a href="#" class="research-link">Preprint</a>
+          <a href="#" class="research-link">Code</a>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-meta">
+          <span>M.Tech Project Report &nbsp;·&nbsp; 2024</span>
+          <span class="research-venue">Delhi Technological University</span>
+        </div>
+        <h3 class="research-title">CNN-based Steganalysis Using Modified-AlexNet</h3>
+        <p class="research-abstract">
+          Investigates deep learning approaches for detecting steganographic content in digital images. 
+          The modified AlexNet architecture incorporates adaptive feature extraction layers, improving 
+          sensitivity to subtle statistical artifacts introduced by common embedding algorithms.
+        </p>
+        <div class="research-links">
+          <a href="#" class="research-link">Report</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">05 — Education</div>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <span class="edu-year">2023 — Present</span>
+        <div>
+          <p class="edu-degree">M.Tech (by Research) — Software Engineering</p>
+          <p class="edu-school">Delhi Technological University, New Delhi</p>
+          <p class="edu-note">Focus: LLM compression, Edge AI, Industrial IoT · Supervisor: [Supervisor Name]</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <span class="edu-year">2019 — 2023</span>
+        <div>
+          <p class="edu-degree">B.Tech — Computer Science & Engineering</p>
+          <p class="edu-school">[Your Undergraduate University], India</p>
+          <p class="edu-note">CGPA: X.XX · [Any notable achievement or specialization]</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">06 — Contact</div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-heading">Let's<br><em>work together.</em></h2>
+        <p class="contact-sub">
+          Open to research collaborations, full-time SDE roles, AI/ML engineering positions, 
+          and interesting problems worth solving.
+        </p>
+        <div class="contact-email-cta">
+          <div class="email-box">
+            <label>Primary Email</label>
+            <p class="email-display">your.email@dtu.ac.in</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-links">
+        <a href="https://github.com/yourusername" target="_blank" class="contact-link-item">
+          <div class="cl-left">
+            <span class="cl-icon">⌥</span>
+            <div>
+              <p class="cl-label">GitHub</p>
+              <p class="cl-value">github.com/yourusername</p>
+            </div>
+          </div>
+          <span class="cl-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link-item">
+          <div class="cl-left">
+            <span class="cl-icon">in</span>
+            <div>
+              <p class="cl-label">LinkedIn</p>
+              <p class="cl-value">linkedin.com/in/yourprofile</p>
+            </div>
+          </div>
+          <span class="cl-arrow">↗</span>
+        </a>
+        <a href="https://scholar.google.com" target="_blank" class="contact-link-item">
+          <div class="cl-left">
+            <span class="cl-icon">◈</span>
+            <div>
+              <p class="cl-label">Google Scholar</p>
+              <p class="cl-value">Your publications</p>
+            </div>
+          </div>
+          <span class="cl-arrow">↗</span>
+        </a>
+        <a href="resume.pdf" target="_blank" class="contact-link-item">
+          <div class="cl-left">
+            <span class="cl-icon">↓</span>
+            <div>
+              <p class="cl-label">Resume / CV</p>
+              <p class="cl-value">Download PDF</p>
+            </div>
+          </div>
+          <span class="cl-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="container">
+  <footer>
+    <span>© 2025 Your Name</span>
+    <span>Built with HTML · Deployed on GitHub Pages / Netlify / Vercel</span>
+  </footer>
+</div>
+
+<script>
+  // Smooth nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.style.color = 'var(--text)';
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+
+  // Subtle fade-in on scroll
+  const fadeEls = document.querySelectorAll('.project-item, .research-card, .edu-item, .skill-group');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    fadeObs.observe(el);
+  });
+</script>
+</body>
+</html>
