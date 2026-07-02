@@ -124,7 +124,7 @@
 
   /* PHOTO */
   .photo-frame {
-    width: 200px; height: 200px;
+    width: 220px; height: 280px;
     border-radius: 3px;
     border: 1px solid var(--border-hover);
     background: var(--bg3);
@@ -153,6 +153,13 @@
     border: 1.5px dashed rgba(255,255,255,0.2);
     display: flex; align-items: center; justify-content: center;
     font-size: 1.4rem;
+  }
+  .photo-frame img {
+    position: relative;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
   }
 
   /* ABOUT */
@@ -383,8 +390,9 @@
   <div class="nav-logo">Bitanu Biswas</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -394,7 +402,7 @@
 <div class="container">
   <section id="hero">
     <div>
-      <p class="hero-eyebrow">M.Tech Researcher &nbsp;·&nbsp; Software Engineer &nbsp;·&nbsp; New Delhi, India</p>
+      <p class="hero-eyebrow">M.Tech Researcher &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; New Delhi, India</p>
       <h1>I'm<br><em>Bitanu Biswas</em></h1>
       <p class="hero-bio">
         Researcher and engineer working at the intersection of <strong style="color:var(--text);font-weight:500">Large Language Models</strong>, 
@@ -403,12 +411,11 @@
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
         <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-        <a href="resume.pdf" class="btn btn-ghost" target="_blank">Resume ↗</a>
+        <a href="assets/Bitanu_Biswas_CV.pdf" class="btn btn-ghost" target="_blank">Resume ↗</a>
       </div>
     </div>
     <div class="photo-frame">
-      <div class="photo-icon">👤</div>
-      <span>Your Photo</span>
+      <img src="dp/profile-pic.jpeg" alt="Bitanu Biswas" />
     </div>
   </section>
 
@@ -418,7 +425,7 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I'm a <strong>Software Engineering researcher</strong> at Delhi Technological University, 
+          I'm a <strong>Data Scientist researcher</strong> at Delhi Technological University, 
           pursuing M.Tech by Research under the supervision of my advisor. My work focuses on 
           compressing Large Language Models for deployment on resource-constrained edge devices.
         </p>
@@ -443,7 +450,7 @@
         </div>
         <div class="detail-row">
           <span class="detail-label">Focus</span>
-          <span class="detail-value">LLM Compression / Edge AI</span>
+          <span class="detail-value">AI/ML, Agentic AI, GenAI, LLM</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Location</span>
@@ -457,9 +464,116 @@
     </div>
   </section>
 
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">02 — Projects</div>
+    <div class="projects-list">
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">001</p>
+          <h3 class="project-title">CNN-based Steganalysis Using Modified-AlexNet</h3>
+          <p class="project-desc">
+            Investigates deep learning approaches for detecting steganographic content in digital images. 
+          The modified AlexNet architecture incorporates adaptive feature extraction layers, improving 
+          sensitivity to subtle statistical artifacts introduced by common embedding algorithms.
+          </p>
+          <div class="project-tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">CNNs</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">OpenCV</span>
+            <!-- <span class="tag">ONNX</span>
+            <span class="tag">Knowledge Distillation</span> -->
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2024-25</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">002</p>
+          <h3 class="project-title">Signature-Based Steganalysis and Feature-Augmented Password Cracking for Steganography Tool SteganographX Plus</h3>
+          <p class="project-desc">
+            This paper analyzes SteganographX Plus, identifying a fixed signature (an embedded email ID) via chosen-stego/message attacks and reverse-engineering its PRNG-based XOR encryption. The authors propose Feature-Augmented Password Cracking (FAPC), exploiting signature and PRNG properties to drastically cut brute-force password-cracking time versus traditional methods, while preserving full detection accuracy.
+          </p>
+          <div class="project-tags">
+            <span class="tag">C</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">SteganographXPlus</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2024</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">003</p>
+          <h3 class="project-title">Vehicle Detection using OpenCV</h3>
+          <p class="project-desc">
+            Developed a vehicle detection system using Python3, OpenCV, and the COCO dataset to identify and classify different vehicle types in real time. The system logged detected vehicles along with corresponding timestamps, enabling automated traffic monitoring and record-keeping. This project strengthened skills in computer vision, object detection, and practical dataset-driven model deployment for real-world surveillance applications.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python3</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">COCO Dataset</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2021</span>
+        </div>
+      </div>
+
+      <!-- <div class="project-item">
+        <div>
+          <p class="project-num">003</p>
+          <h3 class="project-title">Add Your Next Project</h3>
+          <p class="project-desc">
+            Describe the problem you solved, the approach you took, and the measurable outcome. 
+            Numbers and results always stand out to recruiters.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Your Stack</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <span class="project-year">2025</span>
+        </div>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">03 — Experience</div>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <span class="edu-year">2021 — 2023</span>
+        <div>
+          <p class="edu-degree">Infosys </p>
+          <p class="edu-school">Hyderabad, India </p>
+          <p class="edu-note">Focus: ETL Testing, TERADATA, JIRA, Agile Model </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- SKILLS -->
   <section id="skills">
-    <div class="section-label">02 — Skills & Stack</div>
+    <div class="section-label">04 — Skills & Stack</div>
     <div class="skills-grid">
       <div class="skill-group">
         <p class="skill-group-name">Languages</p>
@@ -475,6 +589,7 @@
         <p class="skill-group-name">ML / AI</p>
         <div class="skill-tags">
           <span class="tag">PyTorch</span>
+          <span class="tag">LangChain</span>
           <span class="tag">HuggingFace</span>
           <span class="tag">TensorFlow</span>
           <span class="tag">scikit-learn</span>
@@ -521,79 +636,9 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label">03 — Projects</div>
-    <div class="projects-list">
-
-      <div class="project-item">
-        <div>
-          <p class="project-num">001</p>
-          <h3 class="project-title">LLM Compression for Industrial Edge</h3>
-          <p class="project-desc">
-            Combined Knowledge Distillation (TinyBERT-style) with INT8 post-training quantization 
-            to achieve &gt;60% model size reduction while preserving fault-detection accuracy on 
-            simulated IIoT sensor streams.
-          </p>
-          <div class="project-tags">
-            <span class="tag">PyTorch</span>
-            <span class="tag">HuggingFace</span>
-            <span class="tag">ONNX</span>
-            <span class="tag">Knowledge Distillation</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2024–25</span>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div>
-          <p class="project-num">002</p>
-          <h3 class="project-title">CNN-based Steganalysis (Modified AlexNet)</h3>
-          <p class="project-desc">
-            Designed and trained a modified AlexNet architecture for image steganalysis, achieving 
-            improved detection of LSB and DCT-based steganographic payloads compared to baseline CNN models.
-          </p>
-          <div class="project-tags">
-            <span class="tag">PyTorch</span>
-            <!-- <span class="tag">OpenCV</span> -->
-            <span class="tag">CNN</span>
-            <span class="tag">Image Processing</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2024</span>
-        </div>
-      </div>
-
-      <!-- <div class="project-item">
-        <div>
-          <p class="project-num">003</p>
-          <h3 class="project-title">Add Your Next Project</h3>
-          <p class="project-desc">
-            Describe the problem you solved, the approach you took, and the measurable outcome. 
-            Numbers and results always stand out to recruiters.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Your Stack</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2025</span>
-        </div>
-      </div> -->
-
-    </div>
-  </section>
-
   <!-- RESEARCH -->
   <section id="research">
-    <div class="section-label">04 — Research & Publications</div>
+    <div class="section-label">05 — Research & Publications</div>
     <div class="research-list">
 
       <div class="research-card">
@@ -603,18 +648,15 @@
         </div>
         <h3 class="research-title">Signature-Based Steganalysis and Feature-Augmented Password Cracking for Steganography Tool SteganographX Plus</h3>
         <p class="research-abstract">
-          This work investigates the joint application of task-specific knowledge distillation and 
-          post-training quantization for deploying transformer-based fault detection models on 
-          compute-constrained industrial edge nodes. We demonstrate that the proposed pipeline 
-          achieves competitive accuracy with a significantly reduced inference footprint.
+          This paper analyzes SteganographX Plus, identifying a fixed signature (an embedded email ID) via chosen-stego/message attacks and reverse-engineering its PRNG-based XOR encryption. The authors propose Feature-Augmented Password Cracking (FAPC), exploiting signature and PRNG properties to drastically cut brute-force password-cracking time versus traditional methods, while preserving full detection accuracy.
         </p>
         <div class="research-links">
-          <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12" class="research-link">Preprint</a>
+          <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12"  target="_blank" class="research-link">Preprint</a>
           <!-- <a href="#" class="research-link">Code</a> -->
         </div>
       </div>
 
-      <div class="research-card">
+      <!-- <div class="research-card">
         <div class="research-meta">
           <span>M.Sc. Project Report &nbsp;·&nbsp; 2025</span>
           <span class="research-venue">Visva Bharati University</span>
@@ -626,26 +668,9 @@
           sensitivity to subtle statistical artifacts introduced by common embedding algorithms.
         </p>
         <div class="research-links">
-          <a href="https://github.com/BitanuCS/bitanu.github.io/blob/main/MTech%20Report%202.pdf" class="research-link">Report</a>
+          <a href="https://github.com/BitanuCS/bitanu.github.io/blob/main/assets/MTech_Report_2.pdf" class="research-link">Report</a>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section id="education">
-    <div class="section-label">05 — Experience</div>
-    <div class="edu-list">
-
-      <div class="edu-item">
-        <span class="edu-year">2021 — 2023</span>
-        <div>
-          <p class="edu-degree">Infosys </p>
-          <p class="edu-school">Hyderabad, India </p>
-          <p class="edu-note">Focus: ETL Testing, SQL, JIRA, Agile Model </p>
-        </div>
-      </div>
+      </div> -->
 
     </div>
   </section>
@@ -733,7 +758,7 @@
           </div>
           <span class="cl-arrow">↗</span>
         </a>
-        <a href="Bitanu_Biswas_CV.pdf" target="_blank" class="contact-link-item">
+        <a href="assets/Bitanu_Biswas_CV.pdf" target="_blank" class="contact-link-item">
           <div class="cl-left">
             <span class="cl-icon">↓</span>
             <div>
