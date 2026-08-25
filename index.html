@@ -256,6 +256,14 @@
     font-size: 0.7rem; color: var(--muted);
     letter-spacing: 0.08em;
   }
+  .project-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border-bottom: 1px solid rgba(200,169,110,0.3);
+    transition: border-color 0.2s;
+  }
+  .project-link:hover { border-color: var(--accent); }
 
   /* RESEARCH */
   .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -305,6 +313,22 @@
   .edu-degree { font-weight: 500; margin-bottom: 0.3rem; }
   .edu-school { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
   .edu-note { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  .edu-points { list-style: none; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .edu-points li {
+    position: relative; padding-left: 1rem;
+    font-size: 0.86rem; color: var(--muted); line-height: 1.6;
+  }
+  .edu-points li::before {
+    content: '—'; position: absolute; left: 0; color: var(--accent2);
+  }
+  .research-authors {
+    font-size: 0.82rem; color: var(--text); opacity: 0.75; margin-bottom: 0.6rem;
+  }
+  .research-authors strong { color: var(--accent); font-weight: 500; }
+  .research-doi {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--muted); margin-bottom: 1rem;
+  }
 
   /* CONTACT */
   .contact-grid {
@@ -405,8 +429,9 @@
       <p class="hero-eyebrow">M.Tech Researcher &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; New Delhi, India</p>
       <h1>I'm<br><em>Bitanu Biswas</em></h1>
       <p class="hero-bio">
-        Researcher and engineer working at the intersection of <strong style="color:var(--text);font-weight:500">Large Language Models</strong>, 
-        edge computing, and Industrial IoT — building efficient AI systems that run where compute is scarce.
+        I build <strong style="color:var(--text);font-weight:500">LLM and agentic AI systems</strong> — 
+        grounded RAG pipelines that cite every claim back to the source, and LangGraph workflows that keep 
+        a human in the loop — backed by two years of production data engineering at Infosys.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -425,18 +450,22 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I'm a <strong>Data Scientist researcher</strong> at Delhi Technological University, 
-          pursuing M.Tech by Research under the supervision of my advisor. My work focuses on 
-          compressing Large Language Models for deployment on resource-constrained edge devices.
+          I'm an <strong>M.Tech by Research</strong> student in Data Science at Delhi Technological 
+          University, working on Large Language Models and the systems built around them — retrieval, 
+          grounding, and agentic workflows.
         </p>
         <p>
-          My research combines <strong>Knowledge Distillation</strong> and <strong>Post-Training Quantization</strong> 
-          to enable real-time fault detection in Industrial IoT environments — making AI practical 
-          without the cloud dependency.
+          Recent work includes a <strong>retrieval-augmented compliance assistant</strong> over 25 Indian 
+          and international regulatory frameworks, where every answer carries a framework, section, and 
+          page citation and out-of-corpus questions are refused outright, and an 
+          <strong>agentic job-hunt assistant</strong> built in LangGraph with a human-in-the-loop 
+          confirmation step.
         </p>
         <p>
-          Before this, I completed my undergraduate degree in Computer Science and have worked on 
-          projects spanning image processing, steganalysis, and applied machine learning.
+          Before this I spent two years at <strong>Infosys</strong> as a Test Analyst, validating data 
+          across 30+ large-scale ETL pipelines in Informatica PowerCenter and Teradata — where I learned 
+          that a pipeline is only as trustworthy as what you can prove about it. My earlier research was 
+          in image steganalysis, published with Springer.
         </p>
       </div>
       <div class="about-details">
@@ -450,7 +479,7 @@
         </div>
         <div class="detail-row">
           <span class="detail-label">Focus</span>
-          <span class="detail-value">AI/ML, Agentic AI, GenAI, LLM</span>
+          <span class="detail-value">GenAI, LLMs, Agentic AI, RAG</span>
         </div>
         <div class="detail-row">
           <span class="detail-label">Location</span>
@@ -472,84 +501,147 @@
       <div class="project-item">
         <div>
           <p class="project-num">001</p>
-          <h3 class="project-title">CNN-based Steganalysis Using Modified-AlexNet</h3>
+          <h3 class="project-title">RAG-Based Regulatory Compliance Chatbot</h3>
           <p class="project-desc">
-            Investigates deep learning approaches for detecting steganographic content in digital images. 
-          The modified AlexNet architecture incorporates adaptive feature extraction layers, improving 
-          sensitivity to subtle statistical artifacts introduced by common embedding algorithms.
+            A retrieval-augmented assistant over 27 regulatory documents covering 25 Indian and international
+            frameworks (RBI, SEBI, IRDAI, PMLA, DPDP Act, IT Act, GDPR, ISO 27001), where every claim carries a
+            framework, section, and page citation traceable back to the source PDF. Grounding is enforced with a
+            cosine-distance floor, per-section diversification, and a citation range check, so out-of-corpus
+            questions are refused outright at zero LLM cost instead of being answered from model memory.
+            A confidently wrong answer traced to the ingest layer — not the prompt — led to restoring lost section
+            boundaries, reflowing column-flattened tables, and re-splitting the 48.8% of chunks that were silently
+            exceeding the embedder's 512-token limit. Retrieval is measured by a 30-case harness needing no model
+            calls: MRR 0.819, Hit@6 of 92%, and 4/4 correct refusals.
           </p>
           <div class="project-tags">
-            <span class="tag">PyTorch</span>
-            <span class="tag">CNNs</span>
-            <span class="tag">Image Processing</span>
-            <span class="tag">OpenCV</span>
-            <!-- <span class="tag">ONNX</span>
-            <span class="tag">Knowledge Distillation</span> -->
+            <span class="tag">Python3</span>
+            <span class="tag">LangChain</span>
+            <span class="tag">ChromaDB</span>
+            <span class="tag">BGE Embeddings</span>
+            <span class="tag">Sentence-Transformers</span>
+            <span class="tag">LangSmith</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">pytest</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/BitanuCS/rag-based-compliance-chatbot" target="_blank" class="project-link">GitHub</a>
+            <a href="https://rag-based-compliance-chatbot.streamlit.app/" target="_blank" class="project-link">Live Demo</a>
           </div>
         </div>
         <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2024-25</span>
+          <a href="https://rag-based-compliance-chatbot.streamlit.app/" target="_blank" class="project-arrow">↗</a>
+          <span class="project-year">2026</span>
         </div>
       </div>
 
       <div class="project-item">
         <div>
           <p class="project-num">002</p>
-          <h3 class="project-title">Signature-Based Steganalysis and Feature-Augmented Password Cracking for Steganography Tool SteganographX Plus</h3>
+          <h3 class="project-title">AI-Powered Job Hunt Assistant</h3>
           <p class="project-desc">
-            This paper analyzes SteganographX Plus, identifying a fixed signature (an embedded email ID) via chosen-stego/message attacks and reverse-engineering its PRNG-based XOR encryption. The authors propose Feature-Augmented Password Cracking (FAPC), exploiting signature and PRNG properties to drastically cut brute-force password-cracking time versus traditional methods, while preserving full detection accuracy.
+            An AI tool that reads a resume, infers the roles that actually fit, and searches across 8 job boards to
+            return a ranked, clutter-free list of matching openings. The workflow is designed in LangGraph and
+            includes a human-in-the-loop step that pauses to let the user confirm roles and set filters before
+            searching. Results are ranked with TF-IDF plus an LLM, surfacing realistically reachable roles above
+            far-off ones.
           </p>
           <div class="project-tags">
-            <span class="tag">C</span>
-            <span class="tag">Image Processing</span>
-            <span class="tag">SteganographXPlus</span>
+            <span class="tag">Python3</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">LangChain</span>
+            <span class="tag">LangSmith</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Pydantic</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/BitanuCS/job-hunt-assistant" target="_blank" class="project-link">GitHub</a>
+            <a href="https://jobhuntassistant.streamlit.app/" target="_blank" class="project-link">Live Demo</a>
           </div>
         </div>
         <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2024</span>
+          <a href="https://jobhuntassistant.streamlit.app/" target="_blank" class="project-arrow">↗</a>
+          <span class="project-year">2026</span>
         </div>
       </div>
 
       <div class="project-item">
         <div>
           <p class="project-num">003</p>
-          <h3 class="project-title">Vehicle Detection using OpenCV</h3>
+          <h3 class="project-title">CNN-based Steganalysis Using Modified-AlexNet</h3>
           <p class="project-desc">
-            Developed a vehicle detection system using Python3, OpenCV, and the COCO dataset to identify and classify different vehicle types in real time. The system logged detected vehicles along with corresponding timestamps, enabling automated traffic monitoring and record-keeping. This project strengthened skills in computer vision, object detection, and practical dataset-driven model deployment for real-world surveillance applications.
+            A modified AlexNet CNN for image steganalysis, adapting the architecture to classify images as cover
+            (clean) versus stego (containing hidden embedded data). The baseline was augmented with a high-pass
+            noise-residual preprocessing layer and average-pooling stages to amplify the weak steganographic signal,
+            improving sensitivity to subtle pixel-level embedding. Trained and evaluated on the BOSSbase benchmark
+            of 10,000 grayscale images, reaching 65.25% detection accuracy.
           </p>
           <div class="project-tags">
             <span class="tag">Python3</span>
-            <span class="tag">Image Processing</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">COCO Dataset</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">CNNs</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">BOSSbase</span>
           </div>
         </div>
         <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2021</span>
+          <span class="project-year">2024-25</span>
         </div>
       </div>
 
-      <!-- <div class="project-item">
+      <div class="project-item">
         <div>
-          <p class="project-num">003</p>
-          <h3 class="project-title">Add Your Next Project</h3>
+          <p class="project-num">004</p>
+          <h3 class="project-title">Signature-Based Steganalysis and Feature-Augmented Password Cracking for SteganographX Plus</h3>
           <p class="project-desc">
-            Describe the problem you solved, the approach you took, and the measurable outcome. 
-            Numbers and results always stand out to recruiters.
+            A signature-based steganalysis engine written in C that detects BMP images tampered by SteganographX Plus
+            via its byte-level marker, paired with an LSB extraction routine that recovers hidden payloads directly
+            from stego pixel data. A Feature-Augmented Password Cracking (FAPC) module exploits the signature and the
+            tool's PRNG properties to recover its protection password and unlock concealed data, cutting brute-force
+            time drastically while preserving full detection accuracy.
           </p>
           <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Your Stack</span>
+            <span class="tag">C</span>
+            <span class="tag">GCC</span>
+            <span class="tag">GDB</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">SteganographX Plus</span>
+          </div>
+          <div class="project-links">
+            <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12" target="_blank" class="project-link">Springer Paper</a>
           </div>
         </div>
         <div class="project-meta">
-          <span class="project-arrow">↗</span>
-          <span class="project-year">2025</span>
+          <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12" target="_blank" class="project-arrow">↗</a>
+          <span class="project-year">2024-25</span>
         </div>
-      </div> -->
+      </div>
+
+      <div class="project-item">
+        <div>
+          <p class="project-num">005</p>
+          <h3 class="project-title">Real-time Object Detection using OpenCV and YOLOv3</h3>
+          <p class="project-desc">
+            A real-time vehicle detection system in Python using OpenCV to identify and classify vehicle types from
+            video streams. Each detected vehicle is logged with its type and timestamp, generating a structured
+            record of traffic activity. Trained on the COCO dataset to recognise multiple vehicle classes such as
+            cars, trucks, and buses.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python3</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">YOLOv3</span>
+            <span class="tag">COCO Dataset</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/BitanuCS/realtime-object-detection-yolov3" target="_blank" class="project-link">GitHub</a>
+          </div>
+        </div>
+        <div class="project-meta">
+          <a href="https://github.com/BitanuCS/realtime-object-detection-yolov3" target="_blank" class="project-arrow">↗</a>
+          <span class="project-year">2021</span>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -562,9 +654,19 @@
       <div class="edu-item">
         <span class="edu-year">2021 — 2023</span>
         <div>
-          <p class="edu-degree">Infosys </p>
-          <p class="edu-school">Hyderabad, India </p>
-          <p class="edu-note">Focus: ETL Testing, TERADATA, JIRA, Agile Model </p>
+          <p class="edu-degree">Test Analyst — Infosys</p>
+          <p class="edu-school">Hyderabad, India · Aug 2021 – Jul 2023</p>
+          <ul class="edu-points">
+            <li>Validated data across 30+ large-scale ETL pipelines, checking millions of records and thousands of
+                business-critical datasets in Informatica PowerCenter and Teradata SQL to ensure 100% data integrity
+                from source to target.</li>
+            <li>Worked hands-on with data warehousing structures — Star/Snowflake schemas, metadata, and log tables —
+                verifying loaded data through functional, regression, and progression testing.</li>
+            <li>Automated data workflows and historical data loads using Control-M and ESP job schedulers to improve
+                data quality, while mentoring onsite–offshore teams.</li>
+            <li>Ran end-to-end test planning, execution, and defect tracking in JIRA and HP ALM across Agile and
+                Waterfall delivery, authoring test plans and reporting to senior stakeholders.</li>
+          </ul>
         </div>
       </div>
 
@@ -581,56 +683,50 @@
           <span class="tag">Python</span>
           <span class="tag">C</span>
           <span class="tag">SQL</span>
-          <!-- <span class="tag">JavaScript</span> -->
-          <!-- <span class="tag">Bash</span> -->
+          <span class="tag">Teradata</span>
+          <span class="tag">MySQL</span>
         </div>
       </div>
       <div class="skill-group">
-        <p class="skill-group-name">ML / AI</p>
+        <p class="skill-group-name">GenAI, LLMs &amp; Agentic AI</p>
         <div class="skill-tags">
-          <span class="tag">PyTorch</span>
+          <span class="tag">LangGraph</span>
           <span class="tag">LangChain</span>
+          <span class="tag">LangSmith</span>
+          <span class="tag">RAG</span>
+          <span class="tag">ChromaDB</span>
+          <span class="tag">Sentence-Transformers</span>
           <span class="tag">HuggingFace</span>
+          <span class="tag">Claude Code</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Machine &amp; Deep Learning</p>
+        <div class="skill-tags">
           <span class="tag">TensorFlow</span>
-          <span class="tag">scikit-learn</span>
-          <!-- <span class="tag">ONNX</span> -->
-        </div>
-      </div>
-      <div class="skill-group">
-        <p class="skill-group-name">Research</p>
-        <div class="skill-tags">
-          <span class="tag">Knowledge Distillation</span>
-          <span class="tag">Quantization</span>
-          <span class="tag">TinyBERT</span>
           <span class="tag">CNNs</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <p class="skill-group-name">Edge / IoT</p>
-        <div class="skill-tags">
-          <span class="tag teal">Raspberry Pi</span>
-          <span class="tag teal">ONNX Runtime</span>
-          <span class="tag teal">TFLite</span>
-          <span class="tag teal">MQTT</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <p class="skill-group-name">Data & Tools</p>
-        <div class="skill-tags">
+          <span class="tag">OpenCV</span>
           <span class="tag">NumPy</span>
           <span class="tag">Pandas</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">Matplotlib</span>
         </div>
       </div>
       <div class="skill-group">
-        <p class="skill-group-name">Dev Tools</p>
+        <p class="skill-group-name">Data Engineering</p>
         <div class="skill-tags">
+          <span class="tag teal">Informatica PowerCenter</span>
+          <span class="tag teal">ETL</span>
+          <span class="tag teal">Data Warehousing</span>
+          <span class="tag teal">Star / Snowflake Schemas</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Core CS &amp; Tools</p>
+        <div class="skill-tags">
+          <span class="tag teal">Data Structures &amp; Algorithms</span>
           <span class="tag teal">Git</span>
-          <!-- <span class="tag teal">Linux</span> -->
-          <!-- <span class="tag teal">Docker</span> -->
-          <span class="tag teal">LaTeX</span>
-          <span class="tag teal">VS Code</span>
+          <span class="tag teal">GitHub</span>
+          <span class="tag teal">Streamlit</span>
+          <span class="tag teal">pytest</span>
         </div>
       </div>
     </div>
@@ -638,39 +734,24 @@
 
   <!-- RESEARCH -->
   <section id="research">
-    <div class="section-label">05 — Research & Publications</div>
+    <div class="section-label">05 — Research &amp; Publications</div>
     <div class="research-list">
 
       <div class="research-card">
         <div class="research-meta">
-          <span>Published Paper</span>
-          <span class="research-venue">Year : 2026</span>
+          <span>Published Paper &nbsp;·&nbsp; Springer</span>
+          <span class="research-venue">Feb 2026</span>
         </div>
         <h3 class="research-title">Signature-Based Steganalysis and Feature-Augmented Password Cracking for Steganography Tool SteganographX Plus</h3>
+        <p class="research-authors">Sayak Bhowal, <strong>Bitanu Biswas</strong>, Madhusudan Paul</p>
         <p class="research-abstract">
           This paper analyzes SteganographX Plus, identifying a fixed signature (an embedded email ID) via chosen-stego/message attacks and reverse-engineering its PRNG-based XOR encryption. The authors propose Feature-Augmented Password Cracking (FAPC), exploiting signature and PRNG properties to drastically cut brute-force password-cracking time versus traditional methods, while preserving full detection accuracy.
         </p>
+        <p class="research-doi">DOI: 10.1007/978-3-032-15398-2_12</p>
         <div class="research-links">
-          <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12"  target="_blank" class="research-link">Preprint</a>
-          <!-- <a href="#" class="research-link">Code</a> -->
+          <a href="https://link.springer.com/chapter/10.1007/978-3-032-15398-2_12" target="_blank" class="research-link">Springer Link</a>
         </div>
       </div>
-
-      <!-- <div class="research-card">
-        <div class="research-meta">
-          <span>M.Sc. Project Report &nbsp;·&nbsp; 2025</span>
-          <span class="research-venue">Visva Bharati University</span>
-        </div>
-        <h3 class="research-title">CNN-based Steganalysis Using Modified-AlexNet</h3>
-        <p class="research-abstract">
-          Investigates deep learning approaches for detecting steganographic content in digital images. 
-          The modified AlexNet architecture incorporates adaptive feature extraction layers, improving 
-          sensitivity to subtle statistical artifacts introduced by common embedding algorithms.
-        </p>
-        <div class="research-links">
-          <a href="https://github.com/BitanuCS/bitanu.github.io/blob/main/assets/MTech_Report_2.pdf" class="research-link">Report</a>
-        </div>
-      </div> -->
 
     </div>
   </section>
@@ -685,7 +766,7 @@
         <div>
           <p class="edu-degree">M.Tech (by Research) — Data Science </p>
           <p class="edu-school">Delhi Technological University, New Delhi </p>
-          <p class="edu-note">Focus: LLM compression, Edge AI, Industrial IoT · Supervisor: Ms. Priya Singh </p>
+          <p class="edu-note">GPA: 7.71/10.0 · Jan 2026 – Present · Supervisor: Ms. Priya Singh</p>
         </div>
       </div>
 
@@ -694,7 +775,7 @@
         <div>
           <p class="edu-degree">M.Sc. — Computer Science </p>
           <p class="edu-school">Visva Bharati University, India </p>
-          <p class="edu-note">CGPA: 7.49 </p>
+          <p class="edu-note">GPA: 7.49/10.0 · Aug 2023 – Jun 2025</p>
         </div>
       </div>
 
@@ -703,7 +784,7 @@
         <div>
           <p class="edu-degree">B.Sc. — Computer Science (Honours) </p>
           <p class="edu-school">University of Calcutta, India </p>
-          <p class="edu-note">CGPA: 7.314 </p>
+          <p class="edu-note">GPA: 7.315/10.0 · Jul 2018 – Jun 2021</p>
         </div>
       </div>
 
@@ -717,8 +798,8 @@
       <div>
         <h2 class="contact-heading">Let's<br><em>work together.</em></h2>
         <p class="contact-sub">
-          Open to research collaborations, full-time SDE roles, AI/ML engineering positions, 
-          and interesting problems worth solving.
+          Open to research collaborations, AI/ML and GenAI engineering roles, data engineering 
+          positions, and interesting problems worth solving.
         </p>
         <div class="contact-email-cta">
           <div class="email-box">
@@ -754,6 +835,16 @@
             <div>
               <p class="cl-label">Google Scholar</p>
               <p class="cl-value">Publications</p>
+            </div>
+          </div>
+          <span class="cl-arrow">↗</span>
+        </a>
+        <a href="https://leetcode.com/u/bitanubiswascs/" target="_blank" class="contact-link-item">
+          <div class="cl-left">
+            <span class="cl-icon">&lt;/&gt;</span>
+            <div>
+              <p class="cl-label">LeetCode</p>
+              <p class="cl-value">50+ problems solved</p>
             </div>
           </div>
           <span class="cl-arrow">↗</span>
